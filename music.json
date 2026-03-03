@@ -1,0 +1,186 @@
+{
+  "library_name": "Global Classics & Hits",
+  "total_tracks": 20,
+  "songs": [
+    {
+      "title": "Bohemian Rhapsody",
+      "artist": "Queen",
+      "duration": "5:54",
+      "genre": "Rock",
+      "release_year": 1975,
+      "album": "A Night at the Opera",
+      "is_explicit": false
+    },
+    {
+      "title": "Blinding Lights",
+      "artist": "The Weeknd",
+      "duration": "3:20",
+      "genre": "Pop",
+      "release_year": 2020,
+      "album": "After Hours",
+      "is_explicit": false
+    },
+    {
+      "title": "Billie Jean",
+      "artist": "Michael Jackson",
+      "duration": "4:54",
+      "genre": "Pop",
+      "release_year": 1982,
+      "album": "Thriller",
+      "is_explicit": false
+    },
+    {
+      "title": "Smells Like Teen Spirit",
+      "artist": "Nirvana",
+      "duration": "5:01",
+      "genre": "Rock",
+      "release_year": 1991,
+      "album": "Nevermind",
+      "is_explicit": false
+    },
+    {
+      "title": "Lose Yourself",
+      "artist": "Eminem",
+      "duration": "5:26",
+      "genre": "Hip Hop",
+      "release_year": 2002,
+      "album": "8 Mile",
+      "is_explicit": true
+    },
+    {
+      "title": "Stayin' Alive",
+      "artist": "Bee Gees",
+      "duration": "4:45",
+      "genre": "Disco",
+      "release_year": 1977,
+      "album": "Saturday Night Fever",
+      "is_explicit": false
+    },
+    {
+      "title": "Rolling in the Deep",
+      "artist": "Adele",
+      "duration": "3:48",
+      "genre": "Soul",
+      "release_year": 2011,
+      "album": "21",
+      "is_explicit": false
+    },
+    {
+      "title": "Hotel California",
+      "artist": "Eagles",
+      "duration": "6:30",
+      "genre": "Rock",
+      "release_year": 1976,
+      "album": "Hotel California",
+      "is_explicit": false
+    },
+    {
+      "title": "Sicko Mode",
+      "artist": "Travis Scott",
+      "duration": "5:12",
+      "genre": "Hip Hop",
+      "release_year": 2018,
+      "album": "Astroworld",
+      "is_explicit": true
+    },
+    {
+      "title": "Dreams",
+      "artist": "Fleetwood Mac",
+      "duration": "4:17",
+      "genre": "Rock",
+      "release_year": 1977,
+      "album": "Rumours",
+      "is_explicit": false
+    },
+    {
+      "title": "Levitating",
+      "artist": "Dua Lipa",
+      "duration": "3:23",
+      "genre": "Pop",
+      "release_year": 2020,
+      "album": "Future Nostalgia",
+      "is_explicit": false
+    },
+    {
+      "title": "One More Time",
+      "artist": "Daft Punk",
+      "duration": "5:20",
+      "genre": "Electronic",
+      "release_year": 2000,
+      "album": "Discovery",
+      "is_explicit": false
+    },
+    {
+      "title": "Superstition",
+      "artist": "Stevie Wonder",
+      "duration": "4:26",
+      "genre": "Funk",
+      "release_year": 1972,
+      "album": "Talking Book",
+      "is_explicit": false
+    },
+    {
+      "title": "Humble",
+      "artist": "Kendrick Lamar",
+      "duration": "2:57",
+      "genre": "Hip Hop",
+      "release_year": 2017,
+      "album": "DAMN.",
+      "is_explicit": true
+    },
+    {
+      "title": "Respect",
+      "artist": "Aretha Franklin",
+      "duration": "2:27",
+      "genre": "Soul",
+      "release_year": 1967,
+      "album": "I Never Loved a Man the Way I Love You",
+      "is_explicit": false
+    },
+    {
+      "title": "Thunderstruck",
+      "artist": "AC/DC",
+      "duration": "4:52",
+      "genre": "Rock",
+      "release_year": 1990,
+      "album": "The Razors Edge",
+      "is_explicit": false
+    },
+    {
+      "title": "Take On Me",
+      "artist": "a-ha",
+      "duration": "3:45",
+      "genre": "Synth-pop",
+      "release_year": 1984,
+      "album": "Hunting High and Low",
+      "is_explicit": false
+    },
+    {
+      "title": "Flowers",
+      "artist": "Miley Cyrus",
+      "duration": "3:20",
+      "genre": "Pop",
+      "release_year": 2023,
+      "album": "Endless Summer Vacation",
+      "is_explicit": false
+    },
+    {
+      "title": "Hey Jude",
+      "artist": "The Beatles",
+      "duration": "7:11",
+      "genre": "Rock",
+      "release_year": 1968,
+      "album": "Single",
+      "is_explicit": false
+    },
+    {
+      "title": "Wake Me Up",
+      "artist": "Avicii",
+      "duration": "4:07",
+      "genre": "Electronic",
+      "release_year": 2013,
+      "album": "True",
+      "is_explicit": false
+    }
+  ]
+}
