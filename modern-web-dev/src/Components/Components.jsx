@@ -9,8 +9,8 @@ function Components() {
     <Router>
       <Routes>
         <Route path="/" element={<MusicListParent />} />
-        <Route path="/add-song" element={<AddSongParent />} />
-        <Route path="/pie-chart" element={<PieChartParent />} />
+        <Route path="/addSong" element={<AddSongParent />} />
+        <Route path="/pieChart" element={<PieChartParent />} />
       </Routes>
     </Router>
   )
