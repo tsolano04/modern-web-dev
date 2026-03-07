@@ -4,7 +4,7 @@ import AddSongParent from './addSong/addSongParent'
 import PieChartParent from './pieChart/pieChartParent'
 import Footer from './Footer/Footer'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
-
+//contatins all the components and routing
 function Components() {
   return (
     <Router>

@@ -5,29 +5,18 @@
 - Initial project implemented with Preact + HTM under the `preact/` folder.
 - Key files: `preact/App.js`, `preact/Components/*`, `preact/Services/getMusic/getMusic.js`, and `preact/music.json`.
 
-Changes since 0.1.0
+Major changes since 0.1.0
 
-- Migrated UI components from Preact to React (JSX + hooks) and added them to the React app's `src/Components/`:
-  - `src/Components/addSong/addSongChild.jsx`
-  - `src/Components/addSong/addSongParent.jsx`
-  - `src/Components/musicList/musicListChild.jsx`
-  - `src/Components/musicList/musicListParent.jsx`
-  - `src/Components/pieChart/pieChartChild.jsx`
-  - `src/Components/pieChart/pieChartParent.jsx`
+- Migrated UI from Preact to React and added core components under `src/Components/`.
+- Wired the React app to use the migrated components via `src/App.jsx`.
+- Added data and service support:
+  - `public/music.json` and `src/Services/getMusic/getMusic.js` for the music dataset.
+  - Parse integration (`src/Services/parseServices/`) with unified helpers to create, fetch, update, and delete `post` and `comment` objects.
+- Comments support: UI for creating and displaying comments, stored as `comment` objects that point to `post` objects in Parse.
 
-- Added React service and data files:
-  - `src/Services/getMusic/getMusic.js` — switched to `fetch` and fetches `/music.json`.
-  - `public/music.json` — moved/copy of the dataset so the React app can fetch it.
+- Routing: added client-side routing between pages and components.
+- Footer: added a site footer component present across pages.
 
-- Replaced Vite scaffold in `src/App.jsx` with the migrated components so the React app renders the same UI as the original Preact app.
-
-- Added Parse integration services under `src/Services/parseServices/`:
-  - `parseFetch.js` (existing) — fetch helper using `parse` SDK
-  - `parseCreate.js` — `createParseData(className, data)` helper
-  - `parseUpdate.js` — `updateParseData(className, id, data)` helper
-  - `parseDelete.js` — `deleteParseData(className, id)` helper
-
-- Minor:
-  - Converted HTM/`html` usage to standard React JSX and `useState`/`useEffect` hooks.
-  - Kept the original `preact/` directory for reference; no destructive changes were made to that folder.
+Notes:
+- Parse class names used: `post` and `comment`. Ensure your Parse schema matches and that CLP/ACLs allow the intended operations.
 

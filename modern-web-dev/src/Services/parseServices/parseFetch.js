@@ -7,8 +7,8 @@ Parse.initialize(
 
 Parse.serverURL = "https://parseapi.back4app.com";
 
-export const fetchParseData = async () => {
-  const query = new Parse.Query("B4aVehicle");
+export const fetchParseData = async (className = "B4aVehicle") => {
+  const query = new Parse.Query(className);
 
   try {
     const results = await query.find();
