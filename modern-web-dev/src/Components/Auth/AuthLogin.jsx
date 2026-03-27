@@ -19,7 +19,7 @@ const AuthLogin = () => {
           alert(
             `${userLoggedIn.get("firstName")}, you successfully logged in!`
           );
-          navigate("*");
+          navigate("/");
         }
         setLogin(false);
       });
