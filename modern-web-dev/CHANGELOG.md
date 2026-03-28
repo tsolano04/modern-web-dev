@@ -1,11 +1,11 @@
 # Changelog
+**0.3.0 - Feature 5**
 
-**0.1.0 — Preact baseline**
+- Debugged comment-adding functionality
+- Authentication: added authentication and authorization privileges to `addSong` and `pieChart` pages via `src/Components/Auth/AuthService` 
+- Navbar: added a site-wide nav bar
 
-- Initial project implemented with Preact + HTM under the `preact/` folder.
-- Key files: `preact/App.js`, `preact/Components/*`, `preact/Services/getMusic/getMusic.js`, and `preact/music.json`.
-
-Major changes since 0.1.0
+**0.2.0 - Feature 4**
 
 - Migrated UI from Preact to React and added core components under `src/Components/`.
 - Wired the React app to use the migrated components via `src/App.jsx`.
@@ -16,7 +16,14 @@ Major changes since 0.1.0
 
 - Routing: added client-side routing between pages and components.
 - Footer: added a site footer component present across pages.
+- 
 
 Notes:
 - Parse class names used: `post` and `comment`. Ensure your Parse schema matches and that CLP/ACLs allow the intended operations.
+
+
+**0.1.0 — Preact baseline**
+
+- Initial project implemented with Preact + HTM under the `preact/` folder.
+- Key files: `preact/App.js`, `preact/Components/*`, `preact/Services/getMusic/getMusic.js`, and `preact/music.json`.
 

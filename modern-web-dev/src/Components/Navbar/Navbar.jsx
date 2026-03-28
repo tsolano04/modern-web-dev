@@ -4,7 +4,7 @@ import Parse from "parse";
 const Navbar = () => {
     const currentUser = Parse.User.current();
     return (
-        <nav>
+        <nav>{!currentUser && (
             <ul>
                 <li>
                     <Link to="/login">Login</Link>
@@ -13,6 +13,7 @@ const Navbar = () => {
                     <Link to="/register">Register</Link>
                 </li>
             </ul>
+          )  }
             {currentUser && <h1>Hello, {currentUser.get("firstName")}</h1>}
         </nav>
     )
