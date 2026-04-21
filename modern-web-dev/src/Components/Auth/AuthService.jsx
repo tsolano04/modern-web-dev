@@ -30,4 +30,14 @@ export const loginUser = (username, password) => {
 };
 
 // create logout function that can be used in the navbar to log out the user and refresh the page to update the navbar
-  
+export const logoutUser = ({setFlag}) => {
+  Parse.User.logOut()
+    .then(() => {
+      setFlag(false);
+      alert("You successfully logged out!");
+      window.location.reload();
+    })
+    .catch((error) => {
+      alert(`Error: ${error.message}`);
+    });
+};

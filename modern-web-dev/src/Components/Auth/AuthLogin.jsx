@@ -3,7 +3,7 @@ import LoginForm from "./LoginForm";
 import { loginUser } from "./AuthService";
 import { useNavigate } from "react-router-dom";
 
-const AuthLogin = () => {
+const AuthLogin = ({ setFlag }) => {
   const [user, setUser] = useState({
     username: "",
     password: "",
@@ -16,6 +16,7 @@ const AuthLogin = () => {
     if (user && login) {
       loginUser(user.username, user.password).then((userLoggedIn) => {
         if (userLoggedIn) {
+          setFlag(true);
           alert(
             `${userLoggedIn.get("firstName")}, you successfully logged in!`
           );

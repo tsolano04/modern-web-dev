@@ -20,7 +20,7 @@ function Components() {
   }, []);
   return (
     <Router>
-      <Navbar />
+      <Navbar setFlag={setFlag} />
       <Routes>
         <Route path="/" element={<MusicListParent />} />
         <Route
@@ -32,7 +32,7 @@ function Components() {
           element={<ProtectedRoute element={PieChartParent} flag={flag} />}
         />
         <Route path="/register" element={<AuthRegister />} />
-        <Route path="/login" element={<AuthLogin />} />
+        <Route path="/login" element={<AuthLogin setFlag={setFlag}/>} />
       </Routes>
       <Footer />
     </Router>
