@@ -13,6 +13,7 @@ const AuthRegister = () => {
 
   const [add, setAdd] = useState(false);
 
+  // Find way to automatically display user's name in navbar after registration without refreshing the page
   useEffect(() => {
     if (newUser && add) {
       createUser(newUser).then((userCreated) => {

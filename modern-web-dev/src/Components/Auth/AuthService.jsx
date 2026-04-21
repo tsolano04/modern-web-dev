@@ -28,3 +28,6 @@ export const loginUser = (username, password) => {
       alert(`Error: ${error.message}`);
     });
 };
+
+// create logout function that can be used in the navbar to log out the user and refresh the page to update the navbar
+  
