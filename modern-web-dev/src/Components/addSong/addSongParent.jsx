@@ -19,8 +19,6 @@ async function fetchPostsAndComments() {
     fetchParseData('post'),
     fetchParseData('comment', ['post']),
   ]);
-  console.log('Fetched posts:', posts);
-  console.log('Fetched comments:', comments);
   return { posts: posts || [], commentMap: buildCommentsMap(comments) };
 }
 
