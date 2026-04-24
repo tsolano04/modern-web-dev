@@ -1,4 +1,5 @@
 import Parse from "parse";
+const LASTFM_API_KEY = "92ea0b9fbc8ed207b0eead607af4f4d7";
 
 export function createUser(newUser) {
   const user = new Parse.User();
@@ -40,4 +41,11 @@ export const logoutUser = ({setFlag}) => {
     .catch((error) => {
       alert(`Error: ${error.message}`);
     });
+};
+
+export const fetchLastFmInfo = async (lastfmUsername) => {
+  const url = `https://ws.audioscrobbler.com/2.0/?method=user.getinfo&user=${lastfmUsername}&api_key=${LASTFM_API_KEY}&format=json`;
+  const response = await fetch(url);
+  const data = await response.json();
+  return data.user; 
 };

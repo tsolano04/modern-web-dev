@@ -1,38 +1,98 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { searchTracks, getTrackInfo } from '../../Services/LastFm/GetSongData';
+import Parse from 'parse'; 
 
 export default function AddSong({ onChildClick, songsList, onAddComment, commentsMap = {} }) {
   const [title, setTitle] = useState('');
   const [genre, setGenre] = useState('');
-  const [suggester, setSuggester] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
   const [comments, setComments] = useState({});
+  const [isProcessingSelection, setIsProcessingSelection] = useState(false);
+
+  const currentUser = Parse.User.current();
+  const suggesterName = currentUser ? currentUser.get("username") : "Anonymous";
+
+  useEffect(() => {
+    // Don't search if we just selected a song or the input is too short
+    if (isProcessingSelection || title.length < 3) {
+      setSearchResults([]);
+      return;
+    }
+
+    const delayDebounceFn = setTimeout(async () => {
+      const results = await searchTracks(title);
+      setSearchResults(results);
+    }, 400);
+
+    return () => clearTimeout(delayDebounceFn);
+  }, [title, isProcessingSelection]);
+
+  const selectSong = (song) => {
+    setTitle(`${song.name} by ${song.artist}`);
+    setGenre(song.genre || 'Unknown'); 
+    setSearchResults([]);
+  };
+
+  const handleSelectSong = async (song) => {
+    // Lock the search so it doesn't re-trigger when setTitle runs
+    setIsProcessingSelection(true);
+    
+    const displayTitle = `${song.name} by ${song.artist}`;
+    setTitle(displayTitle);
+    setSearchResults([]);
+
+    // Automatically fetch track info for the genre
+    const details = await getTrackInfo(song.artist, song.name);
+    if (details && details.toptags && details.toptags.tag.length > 0) {
+      setGenre(details.toptags.tag[0].name); // Take the top tag as genre
+    } else {
+      setGenre('Unknown');
+    }
+
+    // Unlock searching only if the user clears the box or changes it later
+    // (Or keep it locked until Submit)
+  };
 
   const handleSubmit = () => {
     if (!title) return;
-    const payload = { title, genre, suggester };
+    const payload = { title, genre, suggester: suggesterName };
     onChildClick(payload);
     setTitle('');
     setGenre('');
-    setSuggester('');
   };
-//input fields for song suggestion
+
   return (
     <div className="addSongChild">
-      <input
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        placeholder="Song title..."
-      />
-      <input
-        value={genre}
-        onChange={(e) => setGenre(e.target.value)}
-        placeholder="Genre..."
-      />
-      <input
-        value={suggester}
-        onChange={(e) => setSuggester(e.target.value)}
-        placeholder="Suggester name..."
-      />
-      <button onClick={handleSubmit}>Submit</button>
+      <div className="search-box" style={{ position: 'relative' }}>
+        <input
+          value={title}
+          onChange={(e) => {
+            setIsProcessingSelection(false); // Unlock if they start typing again
+            setTitle(e.target.value);
+          }}
+          placeholder="Type a song name..."
+        />
+
+        {searchResults.length > 0 && (
+          <ul className="dropdown">
+            {searchResults.map((song, i) => (
+              <li key={i} onClick={() => handleSelectSong(song)}>
+                {song.name} — {song.artist}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+
+      <div className="info-preview">
+        <p><strong>Genre:</strong> {genre || 'Select a song...'}</p>
+        <p><strong>Suggester:</strong> {suggesterName}</p>
+      </div>
+
+      <button onClick={handleSubmit} disabled={!title}>Add Song</button>
+
+      <hr />
+
       <h2>Added Songs:</h2>
       <div className="posts">
         {Array.isArray(songsList)

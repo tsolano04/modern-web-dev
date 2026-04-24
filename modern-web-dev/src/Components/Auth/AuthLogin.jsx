@@ -16,16 +16,21 @@ const AuthLogin = ({ setFlag }) => {
     if (user && login) {
       loginUser(user.username, user.password).then((userLoggedIn) => {
         if (userLoggedIn) {
-          setFlag(true);
-          alert(
-            `${userLoggedIn.get("firstName")}, you successfully logged in!`
-          );
+          setFlag(true); 
+          
+          alert(`${userLoggedIn.get("firstName")}, you successfully logged in!`);
+          
+          // 2. Move to home
           navigate("/");
         }
         setLogin(false);
+      }).catch((error) => {
+        alert(error.message);
+        setLogin(false);
       });
     }
-  }, [user, login]);
+  }, [user, login, navigate, setFlag]);
+  
 
   const onChangeHandler = (e) => {
     e.preventDefault();
@@ -42,6 +47,21 @@ const AuthLogin = ({ setFlag }) => {
   const onBackHandler = () => {
     navigate("/");
   };
+
+  const handleLastFmLogin = async () => {
+    try {
+        const user = await Parse.User.logIn(username, password);
+        
+        // CRITICAL: Trigger the flag so the Navbar knows to refresh
+        if (setFlag) {
+            setFlag(true); 
+        }
+        
+        navigate("/");
+    } catch (error) {
+        alert(error.message);
+    }
+};
 
   return (
     <div>
