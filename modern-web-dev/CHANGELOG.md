@@ -1,4 +1,10 @@
 # Changelog
+**0.4.0 - Feature 6**
+
+- Pie chart: replaced placeholder text list with a real interactive pie chart using Recharts
+- Pie chart: genre/artist breakdown renders as a labeled pie with percentage annotations, tooltip, and legend
+- Pie chart: added a border around the chart container
+
 **0.3.0 - Feature 5**
 
 - Debugged comment-adding functionality

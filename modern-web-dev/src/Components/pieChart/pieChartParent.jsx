@@ -16,14 +16,13 @@ export default function PieChartParent() {
     setParameter(param);
   }
 
-  const pieElements = chart.map((e) => e[newParameter]);
-
-  const counts = pieElements.reduce((acc, item) => {
-    acc[item] = (acc[item] || 0) + 1;
+  const counts = chart.reduce((acc, song) => {
+    const key = song[newParameter] || 'Unknown';
+    acc[key] = (acc[key] || 0) + 1;
     return acc;
   }, {});
 
-  const pieChartData = Object.entries(counts).map(([key, value]) => `${key}: ${value}`);
+  const pieChartData = Object.entries(counts).map(([name, value]) => ({ name, value }));
 
   return (
     <div className="pieChartParent">
