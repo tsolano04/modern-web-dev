@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import Parse from 'parse';
-import { searchTracks, getTrackInfo } from '../../Services/LastFm/GetSongData';
+import { searchTracks, getTrackInfo, getArtistTopTag } from '../../Services/LastFm/GetSongData';
 
 export default function AddSong({ onChildClick, songsList, onAddComment, commentsMap = {} }) {
   const [title, setTitle] = useState('');
   const [genre, setGenre] = useState('');
   const [comments, setComments] = useState({});
   const [searchResults, setSearchResults] = useState([]);
+  const [imageUrl, setImageUrl] = useState('');
   const [isProcessingSelection, setIsProcessingSelection] = useState(false);
 
   const currentUser = Parse.User.current();
@@ -32,16 +33,24 @@ export default function AddSong({ onChildClick, songsList, onAddComment, comment
     if (details?.toptags?.tag?.length > 0) {
       setGenre(details.toptags.tag[0].name);
     } else {
-      setGenre('Unknown');
+      const artistTag = await getArtistTopTag(song.artist);
+      setGenre(artistTag || 'Unknown');
     }
+    const images = details?.album?.image;
+    const url =
+      images?.find((img) => img.size === 'extralarge')?.['#text'] ||
+      images?.find((img) => img.size === 'large')?.['#text'] ||
+      '';
+    setImageUrl(url);
   };
 
   const handleSubmit = () => {
     if (!title) return;
-    const payload = { title, genre, suggester: suggesterName };
+    const payload = { title, genre, suggester: suggesterName, imageUrl };
     onChildClick(payload);
     setTitle('');
     setGenre('');
+    setImageUrl('');
     setIsProcessingSelection(false);
   };
 
@@ -61,7 +70,7 @@ export default function AddSong({ onChildClick, songsList, onAddComment, comment
               placeholder="Song title..."
             />
             {searchResults.length > 0 && (
-              <ul className="absolute z-10 w-full mt-1 bg-popover border border-border rounded-md shadow-md overflow-hidden">
+              <ul className="absolute z-10 w-full mt-1 bg-card border border-border rounded-md shadow-md overflow-hidden">
                 {searchResults.map((song, i) => (
                   <li
                     key={i}
@@ -100,15 +109,26 @@ export default function AddSong({ onChildClick, songsList, onAddComment, comment
               const id = post.objectId || post.objectId === 0 ? post.objectId : post.id || i;
               return (
                 <div key={id} className="bg-card border border-border rounded-lg shadow-sm overflow-hidden">
-                  <div className="px-4 py-3 border-b border-border">
-                    <h3 className="font-semibold text-card-foreground">{post.title}</h3>
-                    {(post.genre || post.suggester) && (
-                      <p className="text-sm text-muted-foreground mt-0.5">
-                        {post.genre && <span>{post.genre}</span>}
-                        {post.genre && post.suggester && <span> · </span>}
-                        {post.suggester && <span>suggested by {post.suggester}</span>}
-                      </p>
+                  <div className="flex items-center gap-3 px-4 py-3 border-b border-border">
+                    {post.imageUrl ? (
+                      <img
+                        src={post.imageUrl}
+                        alt={post.title}
+                        className="w-12 h-12 rounded object-cover shrink-0"
+                      />
+                    ) : (
+                      <div className="w-12 h-12 rounded bg-muted shrink-0" />
                     )}
+                    <div className="min-w-0">
+                      <h3 className="font-semibold text-card-foreground">{post.title}</h3>
+                      {(post.genre || post.suggester) && (
+                        <p className="text-sm text-muted-foreground mt-0.5">
+                          {post.genre && <span>{post.genre}</span>}
+                          {post.genre && post.suggester && <span> · </span>}
+                          {post.suggester && <span>suggested by {post.suggester}</span>}
+                        </p>
+                      )}
+                    </div>
                   </div>
 
                   <div className="px-4 py-3 flex flex-col gap-3">

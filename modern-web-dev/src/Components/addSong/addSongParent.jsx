@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import AddSong from './addSongChild';
-import { createParseData, fetchParseData } from '../../Services/parseServices/parseService';
+import { createParseData, fetchParseData, updateParseData } from '../../Services/parseServices/parseService';
+import { searchTracks, getTrackInfo } from '../../Services/LastFm/GetSongData';
 
 function buildCommentsMap(comments) {
   const map = {};
@@ -22,9 +23,38 @@ async function fetchPostsAndComments() {
   return { posts: posts || [], commentMap: buildCommentsMap(comments) };
 }
 
+async function fetchImageUrl(title) {
+  let trackName = title;
+  let artistName = '';
+  if (title.includes(' by ')) {
+    const idx = title.indexOf(' by ');
+    trackName = title.slice(0, idx);
+    artistName = title.slice(idx + 4);
+  }
+  const tryDetails = async (artist, track) => {
+    const details = await getTrackInfo(artist, track);
+    const images = details?.album?.image;
+    return (
+      images?.find((img) => img.size === 'extralarge')?.['#text'] ||
+      images?.find((img) => img.size === 'large')?.['#text'] ||
+      ''
+    );
+  };
+  if (artistName) {
+    const url = await tryDetails(artistName, trackName);
+    if (url) return url;
+  }
+  const results = await searchTracks(trackName);
+  if (results.length > 0) {
+    return await tryDetails(results[0].artist, results[0].name);
+  }
+  return '';
+}
+
 export default function AddSongParent() {
   const [music, setMusic] = useState([]);
   const [commentsMap, setCommentsMap] = useState({});
+  const [backfillStatus, setBackfillStatus] = useState(null);
 
   async function updateList(newSong) {
     setMusic((prev) => [...prev, newSong]);
@@ -33,6 +63,7 @@ export default function AddSongParent() {
         title: newSong.title,
         genre: newSong.genre,
         suggester: newSong.suggester,
+        imageUrl: newSong.imageUrl || '',
       });
       const { posts, commentMap } = await fetchPostsAndComments();
       setMusic(posts);
@@ -61,6 +92,27 @@ export default function AddSongParent() {
     } catch (err) {
       console.error('Failed to create comment:', err);
     }
+  }
+
+  async function backfillArtwork() {
+    const posts = await fetchParseData('post');
+    const missing = posts.filter((p) => !p.imageUrl);
+    if (missing.length === 0) {
+      setBackfillStatus('All songs already have artwork.');
+      return;
+    }
+    setBackfillStatus(`0 / ${missing.length}`);
+    let done = 0;
+    for (const post of missing) {
+      const url = await fetchImageUrl(post.title);
+      if (url) await updateParseData('post', post.objectId, { imageUrl: url });
+      done++;
+      setBackfillStatus(`${done} / ${missing.length}`);
+    }
+    const { posts: refreshed, commentMap } = await fetchPostsAndComments();
+    setMusic(refreshed);
+    setCommentsMap(commentMap);
+    setBackfillStatus('Done!');
   }
 
   return (

@@ -4,6 +4,12 @@
 - Pie chart: replaced placeholder text list with a real interactive pie chart using Recharts
 - Pie chart: genre/artist breakdown renders as a labeled pie with percentage annotations, tooltip, and legend
 - Pie chart: added a border around the chart container
+- Styling: added Tailwind CSS and shadcn/ui with light/dark mode toggle that follows system preferences
+- Layout: converted top navbar to a left sidebar
+- Last.fm: integrated song search autocomplete with auto-filled genre and album art
+- Last.fm: added account connect/disconnect in the sidebar
+- Add Song: song suggestion and comment author names are auto-filled from the logged-in user profile
+- Database: migrated song list from static file to Back4App and seeded existing songs
 
 **0.3.0 - Feature 5**
 
