@@ -11,7 +11,7 @@ export default function MusicListParent() {
 
   return (
     <div className="musicListParent">
-      <MusicList music={music.map((s) => s.title)} />
+      <MusicList music={music} />
     </div>
   );
 }

@@ -1,6 +1,10 @@
 # Changelog
 **0.4.0 - Feature 6**
 
+- Home page: replaced plain song list with a vertical infinite-loop carousel with mouse/trackpad scroll support
+
+
+
 - Pie chart: replaced placeholder text list with a real interactive pie chart using Recharts
 - Pie chart: genre/artist breakdown renders as a labeled pie with percentage annotations, tooltip, and legend
 - Pie chart: added a border around the chart container
