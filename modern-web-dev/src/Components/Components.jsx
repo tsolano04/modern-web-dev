@@ -8,6 +8,7 @@ import Navbar from './Navbar/Navbar'
 import AuthRegister from "./Auth/AuthRegister";
 import AuthLogin from "./Auth/AuthLogin";
 import LastFmCallback from "../Services/LastFm/LastFmCallback";
+import LeaguesManager from './Leagues/LeagueManager'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import { useState, useEffect } from "react";
 import Parse from "parse";
