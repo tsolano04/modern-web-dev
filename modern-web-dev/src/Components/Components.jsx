@@ -13,30 +13,37 @@ import { useState, useEffect } from "react";
 import Parse from "parse";
 
 function Components() {
-    const [flag, setFlag] = useState(false);
+  const [flag, setFlag] = useState(false);
 
   useEffect(() => {
     const currentUser = Parse.User.current();
     setFlag(!!currentUser);
   }, []);
+
   return (
     <Router>
-      <Navbar setFlag={setFlag} />
-      <Routes>
-        <Route path="/" element={<MusicListParent />} />
-        <Route
-          path="/addSong"
-          element={<ProtectedRoute element={AddSongParent} flag={flag} />}
-        />
-        <Route
-          path="/pieChart"
-          element={<ProtectedRoute element={PieChartParent} flag={flag} />}
-        />
-        <Route path="/register" element={<AuthRegister />} />
-        <Route path="/login" element={<AuthLogin setFlag={setFlag}/>} />
-        <Route path="/lastfm-callback" element={<LastFmCallback setFlag={setFlag}/>} />
-      </Routes>
-      <Footer />
+      <div className="flex min-h-screen w-full">
+        <Navbar setFlag={setFlag} />
+        <div className="flex flex-col flex-1">
+          <main className="flex-1 p-6">
+            <Routes>
+              <Route path="/" element={<MusicListParent />} />
+              <Route
+                path="/addSong"
+                element={<ProtectedRoute element={AddSongParent} flag={flag} />}
+              />
+              <Route
+                path="/pieChart"
+                element={<ProtectedRoute element={PieChartParent} flag={flag} />}
+              />
+              <Route path="/register" element={<AuthRegister />} />
+              <Route path="/login" element={<AuthLogin setFlag={setFlag} />} />
+              <Route path="/lastfm-callback" element={<LastFmCallback setFlag={setFlag} />} />
+            </Routes>
+          </main>
+          <Footer />
+        </div>
+      </div>
     </Router>
   )
 }
