@@ -37,6 +37,10 @@ function Components() {
                 path="/pieChart"
                 element={<ProtectedRoute element={PieChartParent} flag={flag} />}
               />
+              <Route
+                path="/leagues"
+                element={<ProtectedRoute element={LeaguesManager} flag={flag} />}
+              />
               <Route path="/register" element={<AuthRegister />} />
               <Route path="/login" element={<AuthLogin setFlag={setFlag} />} />
               <Route path="/lastfm-callback" element={<LastFmCallback setFlag={setFlag} />} />

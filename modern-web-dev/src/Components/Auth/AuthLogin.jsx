@@ -34,7 +34,6 @@ const AuthLogin = ({ setFlag }) => {
 
   const onChangeHandler = (e) => {
     e.preventDefault();
-    console.log(e.target);
     const { name, value: newValue } = e.target;
     setUser({ ...user, [name]: newValue });
   };

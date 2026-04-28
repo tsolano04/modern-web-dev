@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import AuthForm from "./AuthForm";
+import AuthForm from "./RegisterForm";
 import { createUser } from "./AuthService";
 import { useNavigate } from "react-router-dom";
 
@@ -29,15 +29,12 @@ const AuthRegister = () => {
 
   const onChangeHandler = (e) => {
     e.preventDefault();
-    console.log(e.target);
     const { name, value: newValue } = e.target;
-    console.log(newValue);
     setNewUser({ ...newUser, [name]: newValue });
   };
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    console.log(e.target);
     setAdd(true);
   };
 

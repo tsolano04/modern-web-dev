@@ -81,7 +81,7 @@ const Navbar = ({ setFlag }) => {
     <aside className="w-56 min-h-screen flex flex-col bg-sidebar border-r border-sidebar-border shrink-0">
       <div className="px-5 py-4 border-b border-sidebar-border">
         <span className="font-semibold text-sidebar-foreground tracking-tight">
-          Music App
+          Music Share
         </span>
       </div>
 
@@ -111,6 +111,14 @@ const Navbar = ({ setFlag }) => {
                   className="block px-3 py-2 rounded-md text-sm text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors"
                 >
                   Pie Chart
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/leagues"
+                  className="block px-3 py-2 rounded-md text-sm text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors"
+                >
+                  Leagues
                 </Link>
               </li>
             </>
