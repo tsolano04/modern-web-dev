@@ -52,6 +52,9 @@ export default function LeagueJoinParent({ onJoinSuccess, onError }) {
         setLoading(false);
         return;
         }
+
+        currentUser.relation("leagues").add(league);
+        await currentUser.save();
         
         relation.add(currentUser);
 
