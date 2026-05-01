@@ -44,16 +44,11 @@ const LastFmCallback = ({ setFlag }) => {
                 if (setFlag) {
                     setFlag(true);
                 }   
-                // Redirect back to where user was before Last.fm auth
-                const returnUrl = sessionStorage.getItem("lastfmReturnUrl");
-                sessionStorage.removeItem("lastfmReturnUrl");
-                window.location.href = returnUrl || "https://modern-web-oj8vkcpde-tsolano04s-projects.vercel.app/";
+                navigate("/");;
             }
         } catch (error) {
             console.error("Failed to connect to Last.fm:", error);
-            const returnUrl = sessionStorage.getItem("lastfmReturnUrl");
-            sessionStorage.removeItem("lastfmReturnUrl");
-            window.location.href = returnUrl || "https://modern-web-oj8vkcpde-tsolano04s-projects.vercel.app/";
+            navigate("/");
         }
     };
 
