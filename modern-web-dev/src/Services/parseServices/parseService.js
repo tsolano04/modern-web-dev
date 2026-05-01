@@ -6,6 +6,15 @@ Parse.initialize(
 );
 Parse.serverURL = "https://parseapi.back4app.com";
 
+const user = Parse.User.current();
+const acl = new Parse.ACL();
+
+acl.setPublicReadAccess(true);    // Everyone can see the profile
+acl.setWriteAccess(user, true);   // Only the owner can edit
+
+user.setACL(acl);
+await user.save();
+
 export const fetchParseData = async (className = "B4aVehicle", includes = []) => {
   const query = new Parse.Query(className);
   includes.forEach((field) => query.include(field));
