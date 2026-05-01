@@ -44,11 +44,11 @@ const LastFmCallback = ({ setFlag }) => {
                 if (setFlag) {
                     setFlag(true);
                 }   
-                navigate("/", { replace: true });
+                window.location.href = "https://modern-web-oj8vkcpde-tsolano04s-projects.vercel.app/";
             }
         } catch (error) {
             console.error("Failed to connect to Last.fm:", error);
-            navigate("/", { replace: true });
+            window.location.href = "https://modern-web-oj8vkcpde-tsolano04s-projects.vercel.app/";
         }
     };
 

@@ -60,8 +60,8 @@ const Navbar = ({ setFlag }) => {
       }
       return;
     }
-    const CALLBACK_URL = "http://localhost:5173/lastfm-callback";
-    window.location.href = `http://www.last.fm/api/auth/?api_key=${LASTFM_CONFIG.API_KEY}&cb=${CALLBACK_URL}`;
+    const CALLBACK_URL = "https://modern-web-oj8vkcpde-tsolano04s-projects.vercel.app/lastfm-callback";
+    window.location.href = `https://www.last.fm/api/auth/?api_key=${LASTFM_CONFIG.API_KEY}&cb=${CALLBACK_URL}`;
   };
 
   const logout = () => {
