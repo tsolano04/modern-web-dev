@@ -10,6 +10,11 @@ export function createUser(newUser) {
   user.set("email", newUser.email);
   user.set("password", newUser.password);
 
+  const acl = new Parse.ACL();
+  acl.setPublicReadAccess(true);
+  acl.setWriteAccess(user, true);
+  user.setACL(acl);
+
   return user
     .signUp()
     .then((newUserSaved) => {
