@@ -110,12 +110,7 @@ export default function WebParent() {
           
           const data = await fetchLastFmData(lastfmUsername, dataType);
           const items = extractItems(data, connectionType);
-          
-          // Console log the songs/data being pulled
-          console.log(`=== Fetching ${connectionType} for ${lastfmUsername} ===`);
-          console.log('Raw data:', data);
-          console.log('Extracted items:', items);
-          
+
           return {
             ...user,
             lastfmData: items,
@@ -127,7 +122,6 @@ export default function WebParent() {
         
         // Create nodes for each user with Last.fm
         const nodes = usersWithData.map(user => {
-            console.log(`User: ${user.firstName} ${user.lastName}, Last.fm: ${user.lastfmUsername}, Items: ${user.lastfmData.length}`);
           const isCurrentUser = currentUser && user.objectId === currentUser.id;
           return {
             id: user.objectId,
@@ -197,8 +191,6 @@ export default function WebParent() {
             
             // Create a link if there are common items
             if (commonItems.length > 0) {
-              console.log(`=== Connection found between ${userA.lastfmUsername} and ${userB.lastfmUsername} ===`);
-              console.log('Common items:', commonItems);
               
               links.push({
                 source: userA.objectId,
@@ -210,16 +202,8 @@ export default function WebParent() {
             }
           }
         }
-        console.log("Nodes:", nodes);
-        console.log("Links:", links);
 
         setGraphData({ nodes, links });
-        
-        // Summary log
-        console.log(`=== FINAL SUMMARY ===`);
-        console.log(`Total nodes (users): ${nodes.length}`);
-        console.log(`Total links (connections): ${links.length}`);
-        console.log(`Connection type: ${connectionType}`);
       } catch (error) {
         console.error("Error fetching user connections:", error);
         setGraphData({ nodes: [], links: [] });

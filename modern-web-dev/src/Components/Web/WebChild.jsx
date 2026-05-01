@@ -12,59 +12,6 @@ export default function WebGraph({ data, connectionType }) {
   const [hoveredGroup, setHoveredGroup] = useState(null);
   const animationRef = useRef(null);
 
-  // Find groups of 3+ nodes that share a common item
-  const groups = useMemo(() => {
-    if (nodes.length < 3) return [];
-    
-    const itemToNodes = {};
-    
-    // Group nodes by shared items
-    links.forEach(link => {
-      if (!link.items) return;
-      link.items.forEach(item => {
-        const itemKey = item.artist ? `${item.name}|||${item.artist}` : item.name;
-        if (!itemToNodes[itemKey]) {
-          itemToNodes[itemKey] = new Set();
-        }
-        itemToNodes[itemKey].add(link.source);
-        itemToNodes[itemKey].add(link.target);
-      });
-    });
-    
-    // Filter to groups of 3+
-    const result = [];
-    Object.entries(itemToNodes).forEach(([itemKey, nodeSet]) => {
-      if (nodeSet.size >= 3) {
-        const nodeIds = Array.from(nodeSet);
-        const groupNodes = nodeIds.map(id => nodes.find(n => n.id === id)).filter(Boolean);
-        
-        if (groupNodes.length >= 3) {
-          // Calculate bounding circle
-          const xs = groupNodes.map(n => n.x);
-          const ys = groupNodes.map(n => n.y);
-          const centerX = xs.reduce((a, b) => a + b, 0) / xs.length;
-          const centerY = ys.reduce((a, b) => a + b, 0) / ys.length;
-          const maxDist = Math.max(...groupNodes.map(n => 
-            Math.sqrt((n.x - centerX) ** 2 + (n.y - centerY) ** 2)
-          ));
-          
-          result.push({
-            itemKey,
-            nodes: nodeIds,
-            centerX,
-            centerY,
-            radius: maxDist + 30,
-            item: itemKey.includes('|||') 
-              ? { name: itemKey.split('|||')[0], artist: itemKey.split('|||')[1] }
-              : { name: itemKey }
-          });
-        }
-      }
-    });
-    
-    return result;
-  }, [nodes, links]);
-
   // Fetch avatar from Last.fm user.getinfo
   const fetchAvatar = async (lastfmUsername) => {
     try {
@@ -275,36 +222,6 @@ export default function WebGraph({ data, connectionType }) {
             </feMerge>
           </filter>
         </defs>
-
-        {/* Group circles - filled pastel circles around 3+ connected nodes */}
-        <g className="groups">
-          {groups.map((group, index) => (
-            <g
-              key={`group-${index}`}
-            >
-              {/* Filled pastel circle */}
-              <circle
-                cx={group.centerX}
-                cy={group.centerY}
-                r={group.radius}
-                fill="#dbeafe"
-                stroke="#93c5fd"
-                strokeWidth={1}
-                strokeOpacity={0.6}
-              />
-                <text
-                    class="text-muted-foreground text-xs"
-                    x={group.centerX}
-                    y={group.centerY - group.radius - 22}
-                    textAnchor="middle"
-                    fontSize={12}
-                    fontWeight="500"
-                    >
-                    {group.item.artist ? `${group.item.name} - ${group.item.artist}` : group.item.name}
-                </text>
-            </g>
-          ))}
-        </g>
 
         {/* Links */}
         <g className="links">
