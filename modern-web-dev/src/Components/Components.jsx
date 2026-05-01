@@ -2,6 +2,7 @@ import React from 'react'
 import MusicListParent from './musicList/musicListParent'
 import AddSongParent from './addSong/addSongParent'
 import PieChartParent from './pieChart/pieChartParent'
+import WebParent from './Web/WebParent'
 import Footer from './Footer/Footer'
 import ProtectedRoute from './ProtectedRoute/ProtectedRoute'
 import Navbar from './Navbar/Navbar'
@@ -36,6 +37,10 @@ function Components() {
               <Route
                 path="/pieChart"
                 element={<ProtectedRoute element={PieChartParent} flag={flag} />}
+              />
+              <Route
+                path="/web"
+                element={<ProtectedRoute element={WebParent} flag={flag} />}
               />
               <Route
                 path="/leagues"

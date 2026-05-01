@@ -121,6 +121,14 @@ const Navbar = ({ setFlag }) => {
                   Leagues
                 </Link>
               </li>
+              <li>
+                <Link
+                  to="/web"
+                  className="block px-3 py-2 rounded-md text-sm text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors"
+                >
+                  Web
+                </Link>
+              </li>
             </>
           )}
         </ul>
