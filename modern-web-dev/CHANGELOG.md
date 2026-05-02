@@ -14,6 +14,8 @@
 - Last.fm: added account connect/disconnect in the sidebar
 - Add Song: song suggestion and comment author names are auto-filled from the logged-in user profile
 - Database: migrated song list from static file to Back4App and seeded existing songs
+- Leagues: implemented code-accessed 'Leagueing' with other users
+- Web: integrated a track, artist, and album connection 'Web' reserved for users with connected LastFm accounts
 
 **0.3.0 - Feature 5**
 
